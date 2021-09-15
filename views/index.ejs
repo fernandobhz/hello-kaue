@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.4/axios.min.js"
+      integrity="sha512-lTLt+W7MrmDfKam+r3D2LURu0F47a3QaW5nF0c6Hl0JDZ57ruei+ovbg7BrZ+0bjVJ5YgzsAWE+RreERbpPE1g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="https://cdn.tutorialjinni.com/js-yaml/4.1.0/js-yaml.min.js"></script>
+    <script>
+      async function rotaNormal() {
+        const { data } = await axios.get(`/`);
+        debugger;
+        window.resultadoNormal = data;
+        preNormal.innerHTML = data;
+      }
+
+      async function rotaApi() {
+        const { data } = await axios.get(`/api`);
+        debugger;
+        window.resultadoApi = data;
+        preApi.innerHTML = JSON.stringify(data, null, 2);
+      }
+
+      async function rotaYaml() {
+        const { data } = await axios.get(`/yaml`);
+        debugger;
+        window.resultadoApi = data;
+        preYaml.innerHTML = JSON.stringify(jsyaml.load(data), null, 2);
+      }
+    </script>
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+
+    PreNormal: <br />
+    <button onclick="rotaNormal()">Normal</button><br />
+    <pre id="preNormal"></pre>
+    <hr />
+
+    PreApi: <br />
+    <button onclick="rotaApi()">JSON</button><br />
+    <pre id="preApi"></pre>
+
+    PreYaml: <br />
+    <button onclick="rotaYaml()">JSON</button><br />
+    <pre id="preYaml"></pre>
+  </body>
+</html>
